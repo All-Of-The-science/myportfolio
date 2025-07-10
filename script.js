@@ -370,9 +370,52 @@ window.addEventListener('load', () => {
             animateProjectsSection(); 
             animateProjectCardOverlays(); // Call the new function for responsive overlays
             animateContactSection(); 
+            
+            
         }
     });
 });
+
+async function loadProjects() {
+    try {
+        // This is a generic way to fetch multiple files.
+        // For a production site, you might want to create a script that lists all json files.
+        // For now, let's assume we know the filenames.
+        // Replace with the actual list of your project files.
+        const projectFiles = ['e-commerce-platform.json', 'fitness-tracker.json']; // Add your project filenames here
+        const projectGrid = document.querySelector('.project-grid');
+
+        for (const file of projectFiles) {
+            const response = await fetch(`_data/projects/${file}`);
+            if (!response.ok) {
+                console.error(`Failed to load project: ${file}`);
+                continue; // Skip to the next project
+            }
+            const project = await response.json();
+            const projectCard = `
+                <div class="project-card">
+                    <div class="project-card-media">
+                        <div class="desktop-view">
+                             <img src="${project.desktop_image}" loading="lazy" alt="Desktop view of ${project.title}" onerror="this.onerror=null;this.src='https://placehold.co/1280x720/1c1c1c/333333?text=Desktop';">
+                        </div>
+                        <div class="mobile-view">
+                             <img src="${project.mobile_image}" loading="lazy" alt="Mobile view of ${project.title}" onerror="this.onerror=null;this.src='https://placehold.co/360x640/1c1c1c/333333?text=Mobile';">
+                        </div>
+                    </div>
+                    <div class="project-card-overlay">
+                        <h3 class="overlay-title">${project.title}</h3>
+                        <p class="overlay-description">${project.description}</p>
+                        <a href="${project.live_link}" class="btn btn-primary" target="_blank">View Live</a>
+                        <a href="${project.source_code_link}" class="btn btn-secondary" target="_blank">Source Code</a>
+                    </div>
+                </div>
+            `;
+            projectGrid.innerHTML += projectCard;
+        }
+    } catch (error) {
+        console.error('Error loading projects:', error);
+    }
+}
 
 
 // --- Contact Form Logic ---
@@ -418,6 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 behavior: 'smooth',
                 block: 'start'
             });
+
         });
     }
 
@@ -447,4 +491,5 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrolled = (window.scrollY / scrollableHeight) * 100;
         progressBar.style.width = `${scrolled}%`;
     });
+    loadProjects();
 });

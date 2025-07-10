@@ -1,0 +1,20 @@
+{
+  "name": "portfolio_officiel_2_photos_grid---copy",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/All-Of-The-science/myportfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/All-Of-The-science/myportfolio/issues"
+  },
+  "homepage": "https://github.com/All-Of-The-science/myportfolio#readme",
+  "description": ""
+}

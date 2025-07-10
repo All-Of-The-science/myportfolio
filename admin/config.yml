@@ -1,0 +1,21 @@
+backend:
+  name: git-gateway
+  repo: All-Of-The-science/myportfolio # IMPORTANT: Make sure this is your GitHub username/repository
+  branch: main # Or master, depending on your default branch
+
+media_folder: "images/uploads" # Location where new images will be stored
+public_folder: "/images/uploads" # The public-facing path to the media folder
+
+collections:
+  - name: "projects" # Used in routes, e.g., /admin/collections/projects
+    label: "Projects" # Used in the UI
+    folder: "_data/projects" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "string"}
+      - {label: "Desktop Image", name: "desktop_image", widget: "image"}
+      - {label: "Mobile Image", name: "mobile_image", widget: "image"}
+      - {label: "Live Link", name: "live_link", widget: "string"}
+      - {label: "Source Code Link", name: "source_code_link", widget: "string"}
